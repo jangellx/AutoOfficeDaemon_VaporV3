@@ -29,4 +29,20 @@ public func configure(_ config: inout Config, _ env: inout Environment, _ servic
     var migrations = MigrationConfig()
     migrations.add(model: Todo.self, database: .sqlite)
     services.register(migrations)
+
+    // IP and port ( https://stackoverflow.com/questions/48450239/changing-hostname-and-port-with-vapor-3 )
+    let serverConfiure = NIOServerConfig.default(hostname: "0.0.0.0", port: 8182)
+    services.register(serverConfiure)
 }
+
+// Our settings
+let AODSettings = (
+    // SmartThings API
+    app_url:      "https://graph.api.smartthings.com:443/api/smartapps/installations/",
+    app_id:       "Insert SmartThings App ID Here",
+    access_token: "Insert SmartThings Access Token Here",
+
+    // How long to wait after sleep before sending the sleep HTTP request to SmartThings
+    sleep_delay:  60
+)
+
