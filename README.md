@@ -31,41 +31,8 @@ The SmartApp URL, application ID and OAuth2 access token are stored in configure
 Besides the SmartApp URL, application ID and OAuth2 access token, there is a sleep delay.  The idea here is that I have multiple computers on my desk, and if one goes idle and sleeps while I'm using another one I usually immediately wake it back up.  However, I don't want all the lights and monitors to go off just because one machine unexpectedly went to sleep.  To resolve this, a sleep delay can be used to wait a certain number of seconds after display sleep signaling the SmartApp.
 
 ## Auto-Launching the Daemon
-Vapor makes it easy to run the server -- just cd to the proejct dir and type "vapor run server".  The easiest way to automatically launch it is to use launchd, by creating a file in ~/Library/LaunchAgents/com.AutoOfficeDaemon.app.plist with these contents:
+Vapor makes it easy to run the server -- just cd to the proejct dir and type "vapor run server", or run the app manually without the vapor command.  The easiest way to automatically launch it is to use launchd, by creating a file in ~/Library/LaunchAgents/com.AutoOfficeDaemon.app.plist with these contents (here I don't use the vapor command, but rather execute the app directly).
 
-```
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-	<dict>
-		<key>Label</key>
-		<string>com.AutoOfficeDaemon.app</string>
-
-		<key>WorkingDirectory</key>
-		<string>/Users/yourUsername/pathToDaemon/AutoOfficeDaemon</string>
-
-		<key>Program</key>
-		<string>/usr/local/bin/vapor</string>
-
-		<key>ProgramArguments</key>
-		<array>
-			<string>/usr/local/bin/vapor</string>
-			<string>run</string>
-			<string>serve</string>
-		</array>
-
-		<key>RunAtLoad</key>
-		<true/>
-
-		<key>KeepAlive</key>
-		<true/>
-</dict>
-</plist>
-```
-
-Replacing "yourUsername/pathToDaemon" with the actual location of your installation.  
-
-When I tried to get this working on a new machine, "vapor run" gave me a runtime error for some reason, but he app still worked in Xcode, so I changed it to this:
 
 ```
 <?xml version="1.0" encoding="UTF-8"?>
