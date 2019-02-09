@@ -9,7 +9,7 @@ This is an updated version of my original [AutoOfficeDaemon](https://github.com/
 I used Vapor because it is very easy to set up and get running, and I didn't want to spend a huge amount of time on this.  The server's Vapor Applicaiton runs in a background thread and listens for incoming connections on a port defined in configure.swift.  The following URL paths are supported:
 * /status (GET):  Simply returns some JSON indicating if the machine is awake or not.
 * /wake and /sleep (GET): Puts the display to sleep or wakes it up.  You can trigger these from a web browser on your phone, for example, but auto-complete and pre-fetching mean that before you finish entering the URL it has probably already woken or slept the display.
-* /do (PUT):  This looks at the JSON formatted data a "command" property, waking the display if the value is "wake" and sleeping it on "sleep".
+* /do (PUT):  This looks at the JSON formatted data for a "command" property, waking the display if the value is "wake" and sleeping it on "sleep".
 
 The Vapor HTTP client class is also used to make PUT calls to the SmartApp to let it know that the computer has woken or slept, thus allowing it to turn on or off other devices in response. 
 
